@@ -25,7 +25,7 @@ class APIGateway:
 @app.route('/books')
 def books():
    try:
-       response = requests.get('book_service')
+       response = requests.get(SERVICES['book_service'])
        response.raise_for_status()
        books = response.json()
        return render_template('books.html', books=books)
@@ -37,12 +37,12 @@ def books():
 def book_details(book_id):
    try:
        # Get book details
-       book_response = requests.get(f'{'book_service'}/{book_id}')
+       book_response = requests.get(f'{SERVICES['book_service']}/{book_id}')
        book_response.raise_for_status()
        book = book_response.json()
       
        # Get book reviews
-       reviews_response = requests.get(f'{'review_service'}/{book_id}')
+       reviews_response = requests.get(f'{SERVICES['review_service']}/{book_id}')
        reviews_response.raise_for_status()
        reviews = reviews_response.json()
       
@@ -80,7 +80,7 @@ def add_review():
    }
   
    try:
-       response = requests.post('review_service', json=review_data)
+       response = requests.post(SERVICES['review_service'], json=review_data)
        response.raise_for_status()
        flash('Review added successfully!')
    except requests.RequestException as e:
