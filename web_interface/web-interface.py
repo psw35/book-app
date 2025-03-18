@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-API_GATEWAY_URL = "http://localhost:5000"
+API_GATEWAY_URL = "http://api-gateway:5000/api/api_gateway"
 
 @app.route('/')
 def index():

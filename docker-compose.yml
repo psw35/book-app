@@ -1,17 +1,4 @@
-version: '3.8'
-
-
 services:
-  api-gateway:
-  build: ./api_gateway
-  ports:
-    - "5000:5000"
-  depends_on:
-    - books-service
-    - reviews-service
-  networks:
-  - backend
-  
   book-service:
     build: ./book_service
     ports:
@@ -48,6 +35,16 @@ services:
     depends_on:
       - book-service
       - review-service
+
+  api-gateway:
+    build: ./api_gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - book-service
+      - review-service
+    networks:
+      - booknet
 
 
 networks:
